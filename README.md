@@ -1,2 +1,2 @@
 # Networked-Train-Delay-Causality-Inference
-Codes and data for paper: Discovering train delay causality from complex high-speed railway network.
+Source codes and data for our paper: Discovering train delay causality from complex high-speed railway network.
