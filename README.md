@@ -85,4 +85,5 @@ To evaluate the inference performance of CRTHG based on TPR, FPR, AUROC and SHD,
 python utils/evaluate.py
 `
 
-
+## Figures
+We provide the original data for the figures in our paper in the folder `figures`.
