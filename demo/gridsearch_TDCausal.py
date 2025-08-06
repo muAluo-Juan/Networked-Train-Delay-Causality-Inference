@@ -32,7 +32,7 @@ param_grid = {
     'nu_beta': [0.01, 0.001],
     'nu_alpha': [0.01, 0.001],
     'eta': [0.55, 0.58, 0.6, 0.7],
-    'omega': [1e-5, 1e-4, 1e-3, 0.005, 1e-2],  # 0.1效果明显不好
+    'omega': [1e-5, 1e-4, 1e-3, 0.005, 1e-2], 
     # 'eta': [0.58, 0.6],
     # 'omega': [1e-2],
     'Th': [360, 280, 240]
@@ -118,4 +118,5 @@ with open(result_prefix_path + 'best_params.pk', 'wb') as f:
 ''' 
 最佳推理结果及参数重新输入评估函数以保存最佳评估结果
 '''
+
 evaluate_TDCausal(result_prefix_path + 'best_params.pk', generate_path_prefix)
