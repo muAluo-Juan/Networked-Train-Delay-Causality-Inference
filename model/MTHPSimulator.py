@@ -69,9 +69,6 @@ class MTHPSimulation(object):
                     continue
                 trigger_time = v_sches[0]
 
-                '''
-                更换一种生成晚点事件的方式
-                '''
                 event_orders[day][v].append(1)  # 始发站无到站晚点
                 mu_v = mu[v]
                 n_ini = 0
@@ -120,42 +117,6 @@ class MTHPSimulation(object):
                                 temp_id += 1
                                 n_ini += 1
                                 break
-
-                # for idx, s in enumerate(v_stations):  # 列车v途径的所有站点s
-                #     s_order = idx + 1
-                #     if s_order == 1:  # 始发站不发生到站晚点
-                #         continue
-                #
-                #     mu_v = mu[v]
-                #     delta_t = round(np.random.exponential(1 / mu_v))
-                #     temp_time = trigger_time + delta_t
-                #     delay = temp_time - v_sches[idx]
-                #
-                #     if idx < len(v_stations) - 1:
-                #         next_delta = v_sches[idx + 1] - temp_time
-                #         if temp_time > v_sches[idx + 1]:  # 假定不超过下一个该列车到站事件的预计到站时间
-                #             print("temp_time过大: ",
-                #                   [v, s, s_order, temp_time, v_sches[idx], delay, mu[v], temp_id])
-                #             ini_big += 1
-                #             continue
-                #
-                #     if delay > 0:
-                #         trigger_time = temp_time
-                #         print("生成初始晚点事件: ",
-                #               [v, s, s_order, trigger_time, v_sches[idx], delay, mu[v], temp_id])
-                #         X.append(
-                #             [v, s, s_order, trigger_time, v_sches[idx], delay, mu[v], 'ini_delay', day,
-                #              temp_id])
-                #         ini_events.append(temp_id)
-                #         event_orders[day][v].append(s_order)
-                #
-                #         # 更新
-                #         temp_id += 1
-                #     else:
-                #         print("不满足生成初始晚点事件要求: ",
-                #               [v, s, s_order, temp_time, v_sches[idx], delay, mu[v], temp_id])
-                #         ini_small += 1
-
 
             '''
             生成连带晚点事件
@@ -250,17 +211,6 @@ class MTHPSimulation(object):
 
                         # 更新
                         temp_id += 1
-
-                        # '''
-                        # 待删除，看看是否有邻居事件时间大于或等于本事件时间的情况
-                        # '''
-                        # for k in range(K + 1):
-                        #     for index in k_histories[k]:
-                        #         his_t = X[index][3]
-                        #         if his_t >= trigger_time:
-                        #             raise ValueError(
-                        #                 f"history time should smaller than trigger time: {his_t}, {trigger_time}")
-
                     else:
                         print("不满足生成连带晚点事件要求: ",
                               [v, s, s_order, v_sches[idx], delay, mu[v], temp_id])
@@ -294,23 +244,7 @@ class MTHPSimulation(object):
         print("初始晚点的event_id为：", [id_pairs[i] for i in ini_events])
         print("连带晚点的event_id为：", [id_pairs[i] for i in tri_events])
 
-        '''
-        提取新的train_id和station_id（生成的晚点事件的列车和站点不一定和真实数据集一致）
-        '''
-        # new_trains = np.unique(Xn['train'].values)  # temp_train_id
-        # new_trains_id = [i for i in range(len(new_trains))]
-        # new_trains_id_pairs = {key: value for key, value in
-        #                        zip(new_trains, new_trains_id)}  # (temp_train_id, new_train_id)
-        # Xn['train'] = Xn['train'].map(new_trains_id_pairs)  # 将事件文件中的列车id更新为新的
-        # # np.save(generate_path_prefix + 'new_trains_id_pairs.npy', new_trains_id_pairs)
-        #
-        # new_stations = np.unique(Xn['station'].values) # temp_station_id
-        # new_stations_id = [i for i in range(len(new_stations))]
-        # new_stations_id_pairs = {key: value for key, value in
-        #                          zip(new_stations, new_stations_id)}  # (temp_station_id, new_station_id)
-        # Xn['station'] = Xn['station'].map(new_stations_id_pairs)  # 将事件文件中的站点id更新为新的
-        # np.save(generate_path_prefix + 'new_stations_id_pairs.npy', new_stations_id_pairs)
-
+        
         '''
         输出X
         '''
@@ -340,22 +274,7 @@ class MTHPSimulation(object):
         np.save(generate_path_prefix + 'G_X.npy', G_X)
         np.save(generate_path_prefix + 'G_V.npy', new_G_V)
 
-        '''
-        输出站点邻接矩阵
-        '''
-        # new_A = []
-        # new_N_S = len(new_stations)
-        # for k in range(K + 1):
-        #     if k == 0:  # 0阶,单位矩阵,每个站点和自身是连通的(每个站点内的列车和事件可以相互影响)
-        #         adj = np.eye(new_N_S)
-        #     else:
-        #         adj = np.zeros((new_N_S, new_N_S))
-        #         indices = np.where(A[k] > 0)
-        #         for i, j in zip(indices[0], indices[1]):  # A中还是旧的站点id
-        #             if i in new_stations_id_pairs.keys() and j in new_stations_id_pairs.keys():
-        #                 adj[new_stations_id_pairs[i], new_stations_id_pairs[j]] = A[k][i, j]
-        #     new_A.append(adj)
-        # np.save(generate_path_prefix + 'A.npy', new_A)
+        
 
         '''
         保存各项参数
@@ -372,5 +291,6 @@ class MTHPSimulation(object):
 
         with open(generate_path_prefix + 'params.pk', 'wb') as f:
             pickle.dump(params, f)
+
 
         return X
