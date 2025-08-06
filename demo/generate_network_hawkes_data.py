@@ -13,7 +13,7 @@ from utils.util import convert_datetime_with_hours
 generate_path_prefix = '../synthetic_data/2019-10-08_11-07/mthp_jh_4/'
 
 '''
-读取整个铁路网络的运营数据（数据有误，同一天内有同一个列车经过同一个站点的数据）
+读取整个铁路网络的运营数据
 '''
 # train_operation = pd.read_csv("raw_data/high-speed trains operation data.csv")
 # 京沪线
