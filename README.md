@@ -1,20 +1,22 @@
 # Networked Train Delay Causality Inference
 
-Source codes and data for our paper: Discovering train delay causality from the complex high-speed railway network.
+Source codes and data for our paper: Discovering train delay causality in complex railway networks.
 
-Authors: XXX
+Authors: Yunjuan Peng*, Dalin Zhang, Xilu Du, Hailong Zhang*, Te Sun, Jubao Cheng, Yi Xu, Hongwei Wang, Alessandro Calvi, Sabah Mohammed, Renyong Guo, Bin Jia, Ping Huang, Jiqiang Liu
 
-##  Train Delay Causality Inference Framework for the Railway Network
+*Corresponding author(s). E-mail(s): 23111494@bjtu.edu.cn; hailongzhang@vt.edu.
 
-![framework](figures/fig2.png)
+##  Train Delay Causal Inference Framework for Railway Networks
 
-This repository contains a Hawkes-Granger framework for inferring macro-level delayed train causality and micro-level delay event causality.
+![framework](figures/fig1.png)
+
+This repository contains a Hawkes-Granger framework TDCausal for inferring delayed train causal and delay event causal.
 
 The source code is mainly implemented in Python.
 
 ## Requirements
 
-This framework requires Python 3.7 or higher, as well as several common scientific computing libraries, as shown below. These libraries can be installed using pip or conda:
+TDCausal requires Python 3.7 or higher, as well as several common scientific computing libraries, as shown below. These libraries can be installed using pip or conda:
 
 castle 6.1.0
 
@@ -46,7 +48,7 @@ You can also run `pip install -r requirements.txt` to install all dependencies.
 
 #### Experimental Datasets
 
-The synthetic datasets SingleL and CrossL used in our paper for the experiments are shown in the `synthetic_data` folder, and the corresponding parameters for generating them are shown in `params.pk`. The ground truth for delayed train causality and delay event causality is shown in `G_V.pny` and `G_X.npy`.
+The synthetic datasets, SingleL and CrossL, used in our paper for the experiments are located in the `synthetic_data` folder, and the corresponding parameters for generating them are stored in `params.pk`. The ground truth for delayed train causality and delay event causality is shown in `G_V.pny` and `G_X.npy`.
 
 The model used to generate the data is shown in the `model` folder.
 
@@ -67,8 +69,8 @@ The real-world dataset Net used in our paper for the experiments is shown in the
 
 The raw data are collected from the Lanzhou Railway Bureau dispatch centers from April 2, 2025, to April 23, 2025, which cannot be made public due to the confidentiality policies.
 
-## Delay Causality Inference
-Our proposed framework is shown in the `data` folder. We provide a demo to infer macro-level delayed train causality and micro-level delay event causality based on our framework in the `demo` folder. 
+## Delay Causal Inference
+Our proposed framework is shown in the `data` folder. We provide a demo to infer delayed train causality and delay event causality based on our framework TDCausal, in the `demo` folder. 
 
 To perform inference, run:
 
