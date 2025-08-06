@@ -5,17 +5,15 @@ import pickle
 from itertools import product
 import numpy as np
 import pandas as pd
-from utils.evaluate import evaluate_MDPP
+from utils.evaluate import evaluate_TDCausal
 from model.TDCausal import TDCausal
 
 
 # 结果存储路径前缀
 result_prefix_path = '../result/synthetic/2019-11-08_01-07/nhp_jh_jg_xl_hk_150/tdcausal_gridsearch/'
-# result_prefix_path = '../result/synthetic/2019-10-08_11-07/nhp_jh_4/mdpp4_gridsearch2/'
 
 # 实验数据集存储路径前缀
 generate_path_prefix = '../synthetic_data/2019-11-08_01-07/nhp_jh_jg_xl_hk_150/'
-# generate_path_prefix = '../synthetic_data//2019-10-08_11-07/nhp_jh_4/'
 
 # 模拟数据集
 
@@ -91,7 +89,7 @@ for index, params in enumerate(param_combinations):
     with open(result_prefix_path + 'params_' + str(index) + '.pk', 'wb') as f:
         pickle.dump(result, f)
 
-    val_score = evaluate_MDPP(result_prefix_path + 'params_' + str(index) + '.pk', generate_path_prefix)
+    val_score = evaluate_TDCausal(result_prefix_path + 'params_' + str(index) + '.pk', generate_path_prefix)
 
     G_V_TPR, G_X_TPR, G_V_FPR, G_X_FPR = val_score[0], val_score[1], val_score[2], val_score[3]
 
@@ -120,4 +118,4 @@ with open(result_prefix_path + 'best_params.pk', 'wb') as f:
 ''' 
 最佳推理结果及参数重新输入评估函数以保存最佳评估结果
 '''
-evaluate_MDPP(result_prefix_path + 'best_params.pk', generate_path_prefix)
+evaluate_TDCausal(result_prefix_path + 'best_params.pk', generate_path_prefix)
