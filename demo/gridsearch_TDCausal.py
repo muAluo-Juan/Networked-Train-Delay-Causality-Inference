@@ -10,10 +10,10 @@ from model.TDCausal import TDCausal
 
 
 # 结果存储路径前缀
-result_prefix_path = '../result/synthetic/2019-11-08_01-07/nhp_jh_jg_xl_hk_150/tdcausal_gridsearch/'
+result_prefix_path = '../result/synthetic/2019-11-08_01-07/mthp_jh_jg_xl_hk_150/tdcausal_gridsearch/'
 
 # 实验数据集存储路径前缀
-generate_path_prefix = '../synthetic_data/2019-11-08_01-07/nhp_jh_jg_xl_hk_150/'
+generate_path_prefix = '../synthetic_data/2019-11-08_01-07/mthp_jh_jg_xl_hk_150/'
 
 # 模拟数据集
 

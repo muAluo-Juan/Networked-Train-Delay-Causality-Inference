@@ -126,7 +126,7 @@ for index, i in enumerate(np.array(arrival_events)):  # 站点、列车、事件
 提取高铁站点拓扑网络作为G_S(无向有环图)
 '''
 adjacent_stations = pd.read_csv("../raw_data/adjacent railway stations mileage data.csv")
-if not os.path.exists(generate_path_prefix + 'G_S_temp.npy'):
+if not os.path.exists(generate_path_prefix + 'G_S.npy'):
     G_S = np.eye(len(stations), dtype=int)  # 保证自环
     for i in np.array(adjacent_stations):
         if i[0] not in station_pairs or i[1] not in station_pairs:
